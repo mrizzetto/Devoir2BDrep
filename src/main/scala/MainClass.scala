@@ -31,7 +31,7 @@ object MainClass extends App {
   val data: RDD[(String, String)] = dataFrame.flatMap(row => {
     val spellList = row.getAs[Seq[String]]("spells")
     spellList.map(sp => Tuple2(sp.toString(), row.getAs[String]("nameCreature")))
-  }).rdd.reduceByKey(_+','+_)
+}).rdd.reduceByKey(_+','+_)
 
   val r: RDD[(String, Array[String])] = data.map(elem => Tuple2(elem._1, elem._2.split(",")))
 
